@@ -9,7 +9,7 @@ module.exports.getCsv=async(req,res)=>{
     const parser=new Parser({fields});
     const csv = employees.length > 0 ? parser.parse(employees) : '';
 
-    res.attachment('employeeDetails.csv');
+    res.attachment(`employeeDetails-${Date.now()}.csv`);
     res.set('Content-Type', 'text/csv');
 
     res.send(csv);
