@@ -3,7 +3,10 @@ const {Parser}=require('json2csv');
 
 module.exports.getCsv=async(req,res)=>{
     const employees= await Employee.find();
-    const parser=new Parser();
+
+    const fields = ['_id', 'name', 'age', 'salary', 'role'];
+
+    const parser=new Parser({fields});
     const csv = employees.length > 0 ? parser.parse(employees) : '';
 
     res.attachment('employeeDetails.csv');
